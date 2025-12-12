@@ -1,27 +1,29 @@
-import MySQLdb
+import mysql.connector
 import sys
 
 
 def create_database():
-    """Create alx_book_store database if it doesn't exist"""
+    """Create alxbookstore database if it doesn't exist"""
     try:
-        db = MySQLdb.connect(
+        # Connect to MySQL server
+        conn = mysql.connector.connect(
             host="localhost",
-            user="root",      
-            passwd="@Matyman1050",       
-            port=3306
+            user="root",
+            password="@Matyman1050"
         )
         
-        cursor = db.cursor()
+        # Create cursor
+        cursor = conn.cursor()
         
-        cursor.execute("CREATE DATABASE IF NOT EXISTS alx_book_store")
+        cursor.execute("CREATE DATABASE IF NOT EXISTS alxbookstore")
         
-        print("Database 'alx_book_store' created successfully!")
+        print("Database 'alxbookstore' created successfully!")
         
+        # Close cursor and connection
         cursor.close()
-        db.close()
+        conn.close()
         
-    except MySQLdb.Error as e:
+    except mysql.connector.Error as e:
         print(f"Error: {e}")
         sys.exit(1)
 
